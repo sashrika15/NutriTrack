@@ -1,1 +1,3 @@
 # NutriTrack
+
+An intrinsic part of maintaining a healthy lifestyle is eating right. Nutritionists calculate diets for people based on weight and height and give a specific amount of calories you are required to eat in a day. But calculating your calorie intake before every meal can be an annoying and cumbersome task involving a lot of math. NutriTrack will make this job easier with the click of a button. Just give an image of your plate as input to the application, and it will calculate the amount of calories you are eating in that meal. The components of your plate are recognised and segmented and the volume is calculated by using objects in the image such as plates and fingers as reference. 
