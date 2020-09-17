@@ -9,13 +9,17 @@ from mrcnn.model import log
 from mrcnn.config import Config
 from food_dataset import FoodDataset,get_calorie
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 ROOT_DIR = os.getcwd()
 FOOD_DIR = os.path.join(ROOT_DIR, "datasets/food/val")
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 
 #print(ROOT_DIR+"\n"+FOOD_DIR+"\n"+MODEL_DIR)
+
+
+
+
 
 class Inference_config(Config):
     NAME='food'
@@ -43,7 +47,7 @@ dataset_val.load_food(FOOD_DIR,"val")
 dataset_val.prepare()
 
 
-image_id = 5
+image_id = np.random.randint(1,190)
 image = dataset_val.load_image(image_id)
 results = model.detect([image], verbose=0)
 r = results[0]
@@ -51,3 +55,22 @@ r = results[0]
 visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
                             dataset_val.class_names, r['scores'])
 
+
+############# CALORIE CALCULATION #########################
+#Basic intuition is that the ratio of real plate to image plate area = ratio of image food to real food area
+#masked_plate_pixels has been calculated with annotation tools
+masked_plate_pixels=1290166.34 
+#Average real plate radius
+radius = 6
+real_plate_area=3.14*radius*radius
+pixels_per_inch_sq=masked_plate_pixels/real_plate_area
+calories=[]
+items=[]
+for i in range(r['masks'].shape[-1]):
+  masked_food_pixels=r['masks'][:,:,i].sum()
+  class_name=dataset_val.class_names[r['class_ids'][i]]
+  real_food_area=masked_food_pixels/pixels_per_inch_sq
+  calorie=get_calorie(class_name,real_food_area)
+  calories.append(calorie)
+  items.append(class_name)
+  print("{1} with {0} calories".format(int(calorie),class_name))
