@@ -2,7 +2,7 @@ import streamlit as st
 import random
 import os
 import sys
-
+import plotly
 import mrcnn.model as modellib
 from mrcnn import utils
 from mrcnn import visualize
@@ -10,6 +10,7 @@ from mrcnn.model import log
 from mrcnn.config import Config
 from food_dataset import FoodDataset, get_calorie
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 st.markdown("<h1 style='text-align: center; color: black;'>🍟 🍕NUTRITRACK🌭 🍔</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center; color: black;'>A Healthier Way For Your LifeStyle</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center; color: black;'>Made By Team Boron With ❤️</h1>", unsafe_allow_html=True)
@@ -82,7 +83,7 @@ if st.button("SUBMIT"):
     pixels_per_inch_sq = masked_plate_pixels / real_plate_area
     calories = []
     items = []
-    st.title("# Calorific Details Are :  \n")
+    st.title(" Calorific Details Are :  \n")
     for i in range(r['masks'].shape[-1]):
         masked_food_pixels = r['masks'][:, :, i].sum()
         class_name = dataset_val.class_names[r['class_ids'][i]]
@@ -91,5 +92,9 @@ if st.button("SUBMIT"):
         calories.append(calorie)
         items.append(class_name)
         st.write("## -{1} with {0} calories".format(int(calorie), class_name))
+    
+    fig = go.Figure([go.Bar(x=items, y=calories)])
+    st.plotly_chart(fig)
+    
     #st.write("Calorific Details Are :  \n")
     #st.write(print("{1} with {0} calories".format(int(calorie), class_name)))
