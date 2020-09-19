@@ -29,11 +29,11 @@ st.markdown("<h1 style='text-align: center; color: black;'>Made by Team Boron</h
 st.markdown("<hr style='border: 2px solid black;'>", unsafe_allow_html=True)
 
 
-# st.markdown("<h3 style='text-align: left; color: black;'>An intrinsic part of maintaining a healthy lifestyle is "
-#             "eating right. Nutritionists calculate diets for people based on weight and height and give a specific "
-#             "amount of calories you are required to eat in a day. But calculating your calorie intake before every "
-#             "meal can be an annoying and cumbersome task involving a lot of math. NutriTrack will make this job "
-#             "easier with the click of a button. Try it out now!</h2>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: black;'>An intrinsic part of maintaining a healthy lifestyle is "
+            "eating right. Nutritionists calculate diets for people based on weight and height and give a specific "
+            "amount of calories you are required to eat in a day. But calculating your calorie intake before every "
+            "meal can be an annoying and cumbersome task involving a lot of math. NutriTrack will make this job "
+            "easier with the click of a button. Try it out now!</h2>", unsafe_allow_html=True)
 ROOT_DIR = os.getcwd()
 FOOD_DIR = os.path.join(ROOT_DIR, "datasets/food/val")
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
