@@ -1,0 +1,17 @@
+body {
+    color: #000000;
+
+background: #8beff7;
+
+
+}
+
+div.element-container:st.button {
+    margin: 0 auto;
+    display: block;
+}
+
+st.button {
+    margin: 0 auto;
+    display: block;
+}
