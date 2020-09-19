@@ -19,22 +19,21 @@ import mrcnn.model as modellib
 from mrcnn import visualize
 from mrcnn.config import Config
 from food_dataset import FoodDataset, get_calorie
+from weights import check_weights
 
-st.markdown("<h1 style='text-align: center; color: black;'>🍟 🍕NUTRITRACK🌭 🍔</h1>", unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center; color: black;'>A Healthier Way For Your LifeStyle</h1>",
-            unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center; color: black;'>Made By Team Boron With ❤️ </h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: black;'>NutriTrack</h1>", unsafe_allow_html=True)
+# st.markdown("<h1 style='text-align: center; color: black;'>A Healthier Way For Your LifeStyle</h1>",
+#             unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: black;'>Made by Team Boron</h1>", unsafe_allow_html=True)
 
 st.markdown("<hr style='border: 2px solid black;'>", unsafe_allow_html=True)
 
-st.markdown("<h2 style='text-align: center; color: black;'>An intrinsic part of maintaining a healthy lifestyle is "
-            "eating right. Nutritionists calculate diets for people based on weight and height and give a specific "
-            "amount of calories you are required to eat in a day. But calculating your calorie intake before every "
-            "meal can be an annoying and cumbersome task involving a lot of math. NutriTrack will make this job "
-            "easier with the click of a button. Just give an image of your plate as input to the application, "
-            "and it will calculate the amount of calories you are eating in that meal.The components of your plate "
-            "are recognised and segmented and the volume is calculated by using objects in the image such as plates "
-            "and fingers as reference </h2>", unsafe_allow_html=True)
+
+# st.markdown("<h3 style='text-align: left; color: black;'>An intrinsic part of maintaining a healthy lifestyle is "
+#             "eating right. Nutritionists calculate diets for people based on weight and height and give a specific "
+#             "amount of calories you are required to eat in a day. But calculating your calorie intake before every "
+#             "meal can be an annoying and cumbersome task involving a lot of math. NutriTrack will make this job "
+#             "easier with the click of a button. Try it out now!</h2>", unsafe_allow_html=True)
 ROOT_DIR = os.getcwd()
 FOOD_DIR = os.path.join(ROOT_DIR, "datasets/food/val")
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
@@ -76,7 +75,7 @@ model = modellib.MaskRCNN(mode="inference", config=inf, model_dir=MODEL_DIR)
 
 print("\nModel Loaded")
 
-model_path = os.path.join(MODEL_DIR, "model_044.h5")
+model_path = check_weights()
 
 print("Loading weights from ", model_path)
 model.load_weights(model_path, by_name=True)
@@ -85,8 +84,8 @@ dataset_val = FoodDataset()
 dataset_val.load_food(FOOD_DIR, "val")
 dataset_val.prepare()
 
-x = [i for i in range(1, 192)]
-with st.spinner('Wait for it...Now Loading: '):
+
+with st.spinner('Loading: '):
     my_bar = st.progress(0)
 
     for percent_complete in range(100):
@@ -95,14 +94,13 @@ with st.spinner('Wait for it...Now Loading: '):
         my_bar.progress(percent_complete + 1)
 
     my_bar.empty()
-    st.success('Now Ready To Predict!')
-    st.subheader("Please Upload an Image To Get its Calorific Details :  \n")
-    #st.markdown("<h3 style=' color: black;'>Please Enter Image ID BETWEEN 1-190 :</h3>", unsafe_allow_html=True)
-    #val = st.number_input("Enter Image ID Here: ")
 
+    st.success('Ready to predict!')
+    st.subheader("Upload an image:  \n")
+    
     uploaded_file = st.file_uploader("Choose an image...", type="jpg")
     if uploaded_file is not None:
-        with st.spinner('Now Uploading..Please Wait !'):
+        with st.spinner('Uploading.. Please wait!'):
             my_bar = st.progress(0)
 
             for percent_complete in range(100):
@@ -112,12 +110,12 @@ with st.spinner('Wait for it...Now Loading: '):
             my_bar.empty()
             st.success("Uploaded! \n")
 
-    st.markdown("<h2 style='text-align: center; color: black;'>Click ON SUBMIT to get the Predicted results  \n</h2>",
+    st.markdown("<h2 style='text-align: left; color: black;'>Click on Submit after image is uploaded  \n</h2>",
                 unsafe_allow_html=True)
 
     if st.button("SUBMIT"):
 
-        with st.spinner('Segmenting and Predicting Calorific Details..Please Wait !'):
+        with st.spinner('Segmenting and predicting calorie details.. Please wait!'):
             my_bar = st.progress(0)
 
             for percent_complete in range(100):
@@ -126,17 +124,16 @@ with st.spinner('Wait for it...Now Loading: '):
 
                 my_bar.progress(percent_complete + 1)
             my_bar.empty()
-            st.success("Done! Now Showing:  \n")
+            st.success("Done!  \n")
             st.markdown("<hr style='border: 1px solid black;'>", unsafe_allow_html=True)
-            st.markdown("<h2 style='text-align: center; color: black;'>Your Input Image's Details :</h2>",
+            st.markdown("<h3 style='text-align: center; color: black;'>Input image:</h2>",
                         unsafe_allow_html=True)
 
 
 
             st.markdown("<style>hr{border: 2px solid black;}</style>", unsafe_allow_html=True)
             st.write("  \n")
-            #image_id = int(val)
-            #image = dataset_val.load_image(image_id)
+
             if uploaded_file is not None:
                 image = np.array(Image.open(uploaded_file))
                 st.image(image, caption='Uploaded Image.', use_column_width=True)
@@ -151,7 +148,7 @@ with st.spinner('Wait for it...Now Loading: '):
 
                     my_bar.progress(percent_complete + 1)
                 my_bar.empty()
-                st.success("Classified! Now Showing Details:  \n")
+                st.success("Classified!  \n")
 
                 st.write("  \n")
                 results = model.detect([image], verbose=0)
@@ -159,7 +156,6 @@ with st.spinner('Wait for it...Now Loading: '):
 
                 visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'],
                                             dataset_val.class_names, r['scores'])
-                st.write("# Predicted Score :", r['scores'])
 
                 masked_plate_pixels = 1290166.34
                 # Average real plate radius
@@ -168,7 +164,7 @@ with st.spinner('Wait for it...Now Loading: '):
                 pixels_per_inch_sq = masked_plate_pixels / real_plate_area
                 calories = []
                 items = []
-                st.title("Calorific Details Are :  \n")
+                st.title("Calorie Details are:  \n")
                 st.markdown("<hr style='border: 2px solid black;'>", unsafe_allow_html=True)
                 st.write("  \n")
                 for i in range(r['masks'].shape[-1]):
@@ -178,7 +174,7 @@ with st.spinner('Wait for it...Now Loading: '):
                     calorie = get_calorie(class_name, real_food_area)
                     calories.append(calorie)
                     items.append(class_name)
-                    st.write("<h2 style='text-align: center;color: black;'> {1} with {0} calories</h2>".format(int(calorie), class_name),
+                    st.write("<h2 style='text-align: left;color: black;'> {1} with {0} calories</h2>".format(int(calorie), class_name),
                                 unsafe_allow_html=True)
                 fig = go.Figure([go.Bar(x=items, y=calories)])
                 fig.update_layout(title='Calorie Graph', autosize=False,

@@ -13,8 +13,8 @@ An intrinsic part of maintaining a healthy lifestyle is eating right. Nutritioni
 git clone https://github.com/sashrika15/NutriTrack.git 
 ```
 
-### To run:
-Download the weights from this [link](https://drive.google.com/drive/folders/1sLLBavhrrbTwswa_Fza4hSNx_uEGyctg?usp=sharing) and place into logs folder in NutriTrack, then run the following command
+### To run
+Change you directory to NutriTrack, then run the following command
 
 ```
 streamlit run app.py

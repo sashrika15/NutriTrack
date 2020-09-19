@@ -8,13 +8,12 @@ from mrcnn.config import Config
 from mrcnn import model as modellib, utils
 
 
-english_lst=['pudding/custard','smashed potatoes','carrots','spanich','veal breaded cutlet','oranges','scallops','beans','bread','yogurt','pizza','pasta']
-foods_list=['budino', 'patate/pure', 'carote', 'spinaci', 'cotoletta', 'mandarini', 'scaloppine', 'fagiolini', 'pane', 'yogurt', 'pizza','pasta']
-food_diction={'patate/pure': 2, 'BG': 0, 'pane': 9, 'spinaci': 4, 'cotoletta': 5, 'mandarini': 6, 'scaloppine': 7, 'budino': 1, 'carote': 3, 'yogurt': 10, 'pizza': 11, 'fagiolini': 8,'pasta':12}
+english_lst=['Pudding/custard','Smashed potatoes','Carrots','Spinach','Veal bread cutlet','Oranges','Scallops','Beans','Bread','Yogurt','Pizza','Pasta']
+food_diction={'Patate/pure': 2, 'BG': 0, 'Pane': 9, 'Spinaci': 4, 'cotoletta': 5, 'mandarini': 6, 'scaloppine': 7, 'budino': 1, 'carote': 3, 'yogurt': 10, 'pizza': 11, 'fagiolini': 8,'pasta':12}
 
 #calorie_per_square_inch = (calories in food)/(area of plate of dia 12)
-calorie_per_sq_inch={'smashed potatoes':1.4778,'carrots':0.7256,'spanich':0.4102,'veal breaded cutlet':4.4247,'scallops':0.9823,'beans':0.5486,'pizza':6.2477,'pasta':3.5398}
-calorie_per_unit={'pudding/custard':130,'oranges':62,'bread':130,'yogurt':102}
+calorie_per_sq_inch={'Smashed potatoes':1.4778,'Carrots':0.7256,'Spinach':0.4102,'Veal bread cutlet':4.4247,'Scallops':0.9823,'Beans':0.5486,'Pizza':6.2477,'Pasta':3.5398}
+calorie_per_unit={'Pudding/custard':130,'Oranges':62,'Bread':130,'Yogurt':102}
 
 class FoodDataset(utils.Dataset):
 
