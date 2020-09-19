@@ -1,1 +1,4 @@
-This is Updated Version of Original RCNN Where A WebApp Is Made Using Streamlit FrameWork
+Added The Functionality To Upload an image and get the predicted results <br>
+Customized the Interface using CSS <br>
+Added New Background And Progress Bars<br>
+
