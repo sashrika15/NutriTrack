@@ -12,6 +12,11 @@ An intrinsic part of maintaining a healthy lifestyle is eating right. Nutritioni
 ```
 git clone https://github.com/sashrika15/NutriTrack.git 
 ```
+### Requirements
+Install the requirements with the following command
+```
+pip install -r requirements.txt
+```
 
 ### To run
 Change you directory to NutriTrack, then run the following command
