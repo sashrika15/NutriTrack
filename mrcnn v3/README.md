@@ -1,3 +1,3 @@
-Added The Functionality To Upload an image and get the predicted results 
-Customized the Interface using CSS 
-Added New Background And Progress Bars
+Added The Functionality To Upload an image and get the predicted results <br>
+Customized the Interface using CSS <br>
+Added New Background And Progress Bars<br>
