@@ -1,24 +1,14 @@
-import random
 import os
-import sys
-
 import mrcnn.model as modellib
-from mrcnn import utils
 from mrcnn import visualize
-from mrcnn.model import log
 from mrcnn.config import Config
 from food_dataset import FoodDataset,get_calorie
-import matplotlib.pyplot as plt
 import numpy as np
+from PIL import Image
 
 ROOT_DIR = os.getcwd()
 FOOD_DIR = os.path.join(ROOT_DIR, "datasets/food/val")
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
-
-#print(ROOT_DIR+"\n"+FOOD_DIR+"\n"+MODEL_DIR)
-
-
-
 
 
 class Inference_config(Config):
@@ -31,10 +21,11 @@ class Inference_config(Config):
     STEPS_PER_EPOCH = 100
     VALIDATION_STEPS = 10
 
+
+
 inf = Inference_config()
 
 model = modellib.MaskRCNN(mode="inference", config=inf, model_dir=MODEL_DIR)
-
 print("\nModel Loaded")
 
 model_path = os.path.join(MODEL_DIR,"model_044.h5")
@@ -46,9 +37,8 @@ dataset_val = FoodDataset()
 dataset_val.load_food(FOOD_DIR,"val")
 dataset_val.prepare()
 
+image = np.array(Image.open("/Users/sashrikasurya/Documents/NutriTrack/datasets/food/val/20151127_122032.jpg"))
 
-image_id = np.random.randint(1,190)
-image = dataset_val.load_image(image_id)
 results = model.detect([image], verbose=0)
 r = results[0]
 
