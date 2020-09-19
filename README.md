@@ -30,3 +30,4 @@ Right now, our model calculates calories with the help of two main parameters:
 
 ### References
 Thanks to [matterport](https://github.com/matterport/Mask_RCNN) and [binayakpokhrel](https://github.com/binayakpokhrel) for their respective implementations.
+
