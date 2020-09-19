@@ -27,7 +27,8 @@ Change you directory to NutriTrack, then run the following command
 streamlit run app.py
 ```
 ### Tutorial
-![Output gif](https://github.com/sashrika15/NutriTrack/blob/master/test/NutriTrack.gif)
+<img src="https://github.com/sashrika15/NutriTrack/blob/master/test/NutriTrack.gif" width="800">
+
 
 ### Problems
 We ran into some problems during calorie calculation and were unable to calculate depth of the food (through which we had planned on calculating volume, then mass of food), hence we had to look for other methods for calorie calculation. 
