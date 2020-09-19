@@ -13,16 +13,17 @@ def local_css(file_name):
 local_css("style.css")
 
 import os
-
+import plotly
+import plotly.graph_objects as go
 import mrcnn.model as modellib
 from mrcnn import visualize
 from mrcnn.config import Config
 from food_dataset import FoodDataset, get_calorie
 
-st.markdown("<h1 style='text-align: center; color: black;'>NUTRITRACK</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: black;'>🍟 🍕NUTRITRACK🌭 🍔</h1>", unsafe_allow_html=True)
 st.markdown("<h1 style='text-align: center; color: black;'>A Healthier Way For Your LifeStyle</h1>",
             unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center; color: black;'>Made By Team Boron </h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: black;'>Made By Team Boron With ❤️ </h1>", unsafe_allow_html=True)
 
 st.markdown("<hr style='border: 2px solid black;'>", unsafe_allow_html=True)
 
@@ -177,8 +178,18 @@ with st.spinner('Wait for it...Now Loading: '):
                     calorie = get_calorie(class_name, real_food_area)
                     calories.append(calorie)
                     items.append(class_name)
-                    st.write("<h2 style='text-align: center;color: black;'>## {1} with {0} calories</h2>".format(int(calorie), class_name),
+                    st.write("<h2 style='text-align: center;color: black;'> {1} with {0} calories</h2>".format(int(calorie), class_name),
                                 unsafe_allow_html=True)
-
+                fig = go.Figure([go.Bar(x=items, y=calories)])
+                fig.update_layout(title='Calorie Graph', autosize=False,
+                  width=1400, height=800,xaxis_title="TYPE OF FOOD",
+                  yaxis_title="CALORIES",
+                  legend_title="Legend Title",
+                  font=dict(
+                  family="Courier New, monospace",
+                  size=18,
+                  color="RebeccaPurple"),
+                  margin=dict(l=40, r=40, b=40, t=40))
+                st.plotly_chart(fig)
                 # st.write("Calorific Details Are :  \n")
                 # st.write(print("{1} with {0} calories".format(int(calorie), class_name)))

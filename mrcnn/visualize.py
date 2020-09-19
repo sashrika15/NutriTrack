@@ -167,12 +167,7 @@ def display_instances(image, boxes, masks, class_ids, class_names,
     ax.imshow(masked_image.astype(np.uint8))
     if auto_show:
         plt.show()
-        st.markdown("<h2 style='text-align: center; color: black;'>Predicted Image  :</h2>",
-                    unsafe_allow_html=True)
-
-        st.markdown("<hr style='border: 2px solid black;'>", unsafe_allow_html=True)
-        st.write("  \n")
-        st.image(masked_image)
+        st.image(masked_image,caption='Segmented Image.', use_column_width=True)
 
 
 def display_differences(image,
